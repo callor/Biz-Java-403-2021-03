@@ -18,7 +18,7 @@ public class Values_05 {
 		System.out.println(4 > 3);
 		System.out.println(4 < 3);
 		
-		System.out.println(3 >= 3);
+		System.out.println(3 >= 3); // > =
 		System.out.println(3 <= 3);
 		
 		System.out.println(4 >= 3);
@@ -26,7 +26,7 @@ public class Values_05 {
 		
 		// != : 값이 서로 같지 아니한가?
 		//		값이 서로 다르냐?
-		System.out.println(3 != 3);
+		System.out.println(3 != 3); // ! =
 		// System.out.println(3 <> 3);
 		System.out.println();
 		
