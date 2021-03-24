@@ -61,6 +61,7 @@ public class App_07 {
 		for(int num : intNums) {
 			System.out.print(num + "\t");
 		}
+		System.out.println();
 		System.out.println("====================");
 		System.out.println("오름차순 정렬(작->큰)");
 		System.out.println("--------------------");
@@ -87,14 +88,6 @@ public class App_07 {
 		num2 = temp;
 		System.out.print(num1);
 		System.out.println(num2);
-
-		
-		
-		
 		
 	}
-	
-	
-	
-
 }
