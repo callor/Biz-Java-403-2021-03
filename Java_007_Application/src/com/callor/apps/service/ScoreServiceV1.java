@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class ScoreServiceV1 {
 	
-	int[] intKor;
+	int[] intKor = new int[5];
 	int[] intEng;
 	int[] intMath;
 	
