@@ -63,7 +63,7 @@ public class InputServiceV5 {
 			System.out.print(vo.getNum2());
 			
 			System.out.print(" = ");
-			System.out.println(vo.getNum1() - vo.getNum1());
+			System.out.println(vo.getNum1() - vo.getNum2());
 			
 		}
 	}
