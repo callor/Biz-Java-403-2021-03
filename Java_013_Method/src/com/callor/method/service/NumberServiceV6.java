@@ -16,7 +16,6 @@ public class NumberServiceV6 {
 			 * 			아니고 정수이면 범위 유효성 검사를 수행하여
 			 * 				맞지않으면 다시 입력하도록 inputValue() 호출
 			 * 			아니면 정수를 return하여 main()으로 보내기
-			 * 		
 			 */
 			Integer retNum = inService.inputValue("정수(0 ~ 100) ");
 			if (retNum == null) {
