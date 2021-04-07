@@ -8,9 +8,25 @@ import java.util.Scanner;
  * 원칙적으로 같은 클래스에서
  * 같은 이름의 method는 중복하여 작성할수 없다
  * 
+ * inputValue1("새우깡");
+ * inputValue2("새우깡",100);
+ * inputValue3("새우깡",0,1000);
+ * inputValue2("새우깡",0,1000); // 매개변수 오류 
+ * 
+ * public Integer inputValue1(String title);
+ * public Integer inputValue2(String title, int start);
+ * public Integer inputValue3(String title, int start, int end)
+ * 
  * 객체지향 개발 방법에서는
  * 매개변수의 개수, 타입, 순서가 다르면
  * 같은 이름의 method를 중복하여 작성 할 수 있다
+ * 
+ * public Integer inputValue(String title); // 1
+ * public Integer inputValue(String title, int start); // 2
+ * public Integer inputValue(String title, int start, int end) // 3
+ * 
+ * 객체.inputValue("새우깡",100); // 자동으로 2번 method가 연결, 호출
+ * 객체.inputValue(100,"새우깡"); // 매개변수 오류
  * 
  */
 public class InputServiceV2 {
@@ -60,7 +76,8 @@ public class InputServiceV2 {
 				// 유효성 검사를 통과하지 못하면
 				if(intNum < start || intNum > end ) {
 					// 메시지를 보여주고
-					System.out.printf("입력값은 %d ~ %d 까지 입력하세요\n");
+					System.out.printf("입력값은 %d ~ %d 까지 입력하세요\n",
+							start,end);
 					
 					// 다시 inputValue(String title)을 호출하여 입력을
 					//		받아라
