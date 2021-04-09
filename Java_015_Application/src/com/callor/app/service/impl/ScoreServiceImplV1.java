@@ -83,7 +83,12 @@ public class ScoreServiceImplV1 implements ScoreService{
 		
 	}
 
-	private String inputNum() {
+	/*
+	 * 현재 클래스 내부에서만 호출되는 method private으로 선언한다
+	 * 현재 클래스를 상속받아 확장하여 사용할수 있도록 하려면
+	 * private => protected로 변경 해주는 좋다
+	 */
+	protected String inputNum() {
 		
 		// 학번입력처리 : 001, 002 형식으로 입력받자
 		// 정수 1 이상을 입력하면
