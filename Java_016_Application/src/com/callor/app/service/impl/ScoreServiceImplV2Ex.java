@@ -1,5 +1,8 @@
 package com.callor.app.service.impl;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -102,6 +105,7 @@ public class ScoreServiceImplV2Ex extends ScoreServiceImplV2 {
 		System.out.println("=".repeat(50));
 		scoreList.add(scoreVO);
 	}
+	
 	@Override
 	public void printScore() {
 		
@@ -132,22 +136,61 @@ public class ScoreServiceImplV2Ex extends ScoreServiceImplV2 {
 		}
 		System.out.println("=".repeat(80));
 	}
+	
 	@Override
 	public void saveScore() {
 		
-		System.out.println("성적리스트 저장");
-		System.out.println("저장할 파일이름을 입력하세요");
-		System.out.print(">> ");
-		String strFileName = scan.nextLine();
-		if(strFileName.equals("")) {
-			System.out.println("파일이름을 입력해야 합니다");
+		while(true) {
+			System.out.println("성적리스트 저장");
+			System.out.println("저장할 파일이름을 입력하세요");
+			System.out.print(">> ");
+			String strFileName = scan.nextLine();
+			if(strFileName.equals("")) {
+				System.out.println("파일이름을 입력해야 합니다");
+				continue;
+			}
+			
+			FileWriter fileWriter = null;
+			PrintWriter out = null;
+			
+			strFileName = "src/com/callor/app/" 
+						+ strFileName 
+						+ ".txt";
+			
+			try {
+				fileWriter = new FileWriter(strFileName);
+				out = new PrintWriter(fileWriter);
+				
+				int nSize = scoreList.size();
+				/*
+				 * 파일에 저장할때
+				 * 각 데이터를 컴마(,)로 구분하여 입력하고
+				 * 파일이름을 *.csv로 저장하면
+				 * excel에서 파일을 읽을 수 있다
+				 * 
+				 *  csv : comma-separated-variables
+				 *  컴마로 값을 구분한 파일
+				 */
+				for(int i = 0 ; i < nSize ; i++) {
+					ScoreVO vo = scoreList.get(i);
+					out.print(vo.getNum() + ",");
+					out.print(vo.getName() + ",");
+					out.print(vo.getKor() + ",");
+					out.print(vo.getEng() + ",");
+					out.println(vo.getMath());
+				}
+				out.flush();
+				out.close();
+				
+			} catch (IOException e) {
+				System.out.println("파일을 생성할수 없습니다");
+				System.out.println("파일 이름을 다시 입력해 주세요");
+				continue;
+			}
 			return;
 		}
-		
-		
-		
-		
 	}
+	
 	
 	
 	
