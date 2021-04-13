@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import com.callor.score.model.ScoreVO;
 
-public class ScoreServiceV2Ex extends ScoreServiceImplV1Ex {
+public class ScoreServiceImplV2Ex extends ScoreServiceImplV1Ex {
 
 	protected List<ScoreVO> scoreList;
 	protected Scanner scan;
@@ -20,7 +20,7 @@ public class ScoreServiceV2Ex extends ScoreServiceImplV1Ex {
 	protected final int 영어 = 1;
 	protected final int 수학 = 2;
 	
-	public ScoreServiceV2Ex() {
+	public ScoreServiceImplV2Ex() {
 		scoreList = new ArrayList<ScoreVO>();
 		scan = new Scanner(System.in);
 		subjectList = new String[] {"국어","영어","수학"};
