@@ -132,15 +132,5 @@ public class ScoreServiceImplV2Ex extends ScoreServiceImplV1Ex {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 	}
-	
-	
-	
-	
-	
-	
 }
