@@ -87,7 +87,7 @@ public class StudentServiceImplV1A implements StudentService {
 				studentVO.setAddress(sts[주소]);
 
 				// Debugin code
-				System.out.println(studentVO.toString());
+				// System.out.println(studentVO.toString());
 				studentList.add(studentVO);
 			}
 			buffer.close();
