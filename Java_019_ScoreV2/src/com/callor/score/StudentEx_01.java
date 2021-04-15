@@ -1,7 +1,7 @@
 package com.callor.score;
 
 import com.callor.score.service.StudentService;
-import com.callor.score.service.StudentServiceImplV1A;
+import com.callor.score.service.impl.StudentServiceImplV1A;
 
 public class StudentEx_01 {
 	

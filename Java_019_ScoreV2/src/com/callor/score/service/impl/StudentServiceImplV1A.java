@@ -1,4 +1,4 @@
-package com.callor.score.service;
+package com.callor.score.service.impl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.callor.score.model.StudentVO;
+import com.callor.score.service.StudentService;
 public class StudentServiceImplV1A implements StudentService {
 
 	protected List<StudentVO> studentList;
@@ -80,7 +81,7 @@ public class StudentServiceImplV1A implements StudentService {
 				String[] sts = reader.split(":");
 				StudentVO studentVO = new StudentVO();
 				studentVO.setNum(sts[학번]);
-				studentVO.setName(sts[학번]);
+				studentVO.setName(sts[이름]);
 				studentVO.setGrade(sts[학년]);
 				studentVO.setDept(sts[학과]);
 				studentVO.setAddress(sts[주소]);
@@ -99,7 +100,28 @@ public class StudentServiceImplV1A implements StudentService {
 
 	@Override
 	public StudentVO getStudent(String num) {
-		// TODO Auto-generated method stub
+		// TODO 학번으로 학생조회하여 학생정보 return
+		
+		// 1.번 코드
+		int nSize = studentList.size();
+		for(int i = 0 ; i < nSize ; i++) {
+			// int num;
+			// num = 100;
+			// int num = 100;
+			
+			// StudentVO vo = null;
+			// vo = studentList.get(i);
+			StudentVO vo = studentList.get(i);
+			if(vo.getNum().equals(num)) {
+				return vo;
+			}
+		}
+
+		// 2.번 코드
+		// 새로운 for, forEach
+		for(StudentVO vo : studentList) {
+			if(vo.getNum().equals(num)) return vo;
+		}
 		return null;
 	}
 
