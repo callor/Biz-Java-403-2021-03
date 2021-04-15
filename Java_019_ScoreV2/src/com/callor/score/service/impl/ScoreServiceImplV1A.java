@@ -112,15 +112,14 @@ public class ScoreServiceImplV1A implements ScoreService {
 	}
 
 	@Override
-	public void loadService() {
+	public void loadScore() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void printStudent() {
-		// TODO Auto-generated method stub
-		
+	public void printScore() {
+		// TODO 성적리스트 출력
 	}
 
 }
