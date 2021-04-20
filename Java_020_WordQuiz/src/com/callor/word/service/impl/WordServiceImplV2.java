@@ -1,10 +1,18 @@
 package com.callor.word.service.impl;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 
+import com.callor.word.domain.ScoreVO;
 import com.callor.word.domain.WordVO;
 
 /*
+ * 
  * 점수 처리
  * 단어를 맞추면 점수를 (+)
  * 단어를 틀리면 재도전 하면 (-)
@@ -15,7 +23,20 @@ import com.callor.word.domain.WordVO;
 public class WordServiceImplV2 extends WordServiceImplV1{
 	
 	protected WordVO gameWord;
+	protected ScoreVO score;
+	protected String basePath;
+	
+	protected final int 맞은개수 = 0;
+	protected final int 틀린개수 = 1;
+	protected final int 포인트 = 2;
 
+	public WordServiceImplV2() {
+		score = new ScoreVO(3);
+		basePath = "src/com/callor/word/";
+		
+		this.loadScore();
+	}
+	
 	/*
 	 * getSuffleWord() method를 호출하여
 	 * suffle된 영단어를 받고
@@ -26,7 +47,12 @@ public class WordServiceImplV2 extends WordServiceImplV1{
 	 */
 	public void startGame() {
 		
+		
 		while(true) {
+			
+			score.set힌트보기(0);
+			score.set재도전(3);
+			
 			// 게임용 단어 만들기
 			int nWordIndex = rnd.nextInt(nWordCount);
 			WordVO wordVO = wordList.get(nWordIndex);
@@ -39,6 +65,8 @@ public class WordServiceImplV2 extends WordServiceImplV1{
 			while(true) {
 				String strInput = this.inputWord( viewWord );
 				if(strInput.equals("Quit")) {
+					this.viewScore();
+					this.saveScore();
 					System.out.println("게임종료");
 					/*
 					 * return문은 반복문의 
@@ -64,6 +92,10 @@ public class WordServiceImplV2 extends WordServiceImplV1{
 					
 					// 점수 계산
 					this.yesNo(wordVO, strInput);
+					if(score.get재도전() <= 0) {
+						System.out.println("재도전 기회가 없음");
+						break;
+					}
 					
 //					String strEng = wordVO.getEnglish();
 //					if(strEng.equalsIgnoreCase(strInput)) {
@@ -80,14 +112,112 @@ public class WordServiceImplV2 extends WordServiceImplV1{
 		System.out.println("+".repeat(50));
 		System.out.println(wordVO.getKorea());
 		System.out.println("+".repeat(50));
+		score.set힌트보기( score.get힌트보기() + 1 );
+		this.viewScore();
 	}
 	
 	// 단어 채점
 	protected void yesNo(WordVO wordVO, String input) {
 		String strEng = wordVO.getEnglish();
 		if(strEng.equalsIgnoreCase(input)) {
+			score.set맞은개수( score.get맞은개수() + 1 );
 			System.out.println("맞았습니다");
+		} else {
+			score.set틀린개수( score.get틀린개수() + 1 );
+			score.set재도전( score.get재도전() - 1 );
 		}
+		this.viewScore();
+	}
+	
+	protected void viewScore() {
+		
+		System.out.println("=".repeat(50));
+		System.out.println("현재 SCORE");
+		System.out.println("-".repeat(50));
+		System.out.printf("맞은개수 : %d\n",score.get맞은개수());
+		System.out.printf("틀린개수 : %d\n",score.get틀린개수());
+		System.out.printf("포인트 : %d\n",score.get포인트());
+		System.out.printf("힌트확인 : %d\n",score.get힌트보기());
+		System.out.printf("재도전 : %d\n",score.get재도전());
+		System.out.println("=".repeat(50));
+		
+	}
+	
+	protected void saveScore() {
+		while(true) {
+			System.out.println("저장할 파일이름 입력");
+			System.out.print(">> ");
+			String fileName = scan.nextLine();
+			if(fileName.equals("")) {
+				System.out.println("파일이름은 반드시 입력하야 합니다");
+				continue;
+			}
+			
+			FileWriter fileWriter = null;
+			PrintWriter out = null;
+		
+			try {
+				fileWriter 
+					= new FileWriter(basePath + fileName);
+				out = new PrintWriter(fileWriter);
+				out.printf("%d:%d:%d\n",
+						score.get맞은개수(),
+						score.get틀린개수(),
+						score.get포인트()
+				);
+				out.flush();
+				out.close();
+				System.out.println("게임저장 완료!!!");
+				return;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println(fileName + "파일 생성 오류");
+				System.out.println("파일 이름을 다시 입력하세요");
+			}
+		} // end while
+		
+	} // end saveScore()
+	
+	protected void loadScore() {
+
+		while(true) {
+			
+			System.out.println("불러올 파일이름을 입력하세요");
+			System.out.print(">> ");
+			String fileName = scan.nextLine();
+			if(fileName.equals("")) {
+				System.out.println("게임을 처음부터 시작합니다");
+				score = new ScoreVO(3);
+				return;
+			}
+			
+			FileReader fileReader = null;
+			BufferedReader buffer = null;
+			try {
+				fileReader = new FileReader(basePath + fileName);
+				buffer = new BufferedReader(fileReader);
+				String reader = buffer.readLine();
+				String[] sc = reader.split(":");
+				this.score = new ScoreVO();
+				
+				score.set맞은개수(Integer.valueOf(sc[맞은개수]));
+				score.set틀린개수(Integer.valueOf(sc[틀린개수]));
+				score.set포인트(Integer.valueOf(sc[포인트]));
+				buffer.close();
+				return;
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("파일이 없습니다");
+				System.out.println("파일명을 다시 입력하세요");
+				continue;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("파일을 읽을 수 없습니다");
+				score = new ScoreVO();
+				return;
+			}
+		} // end while
+		
 	}
 	
 	/*
