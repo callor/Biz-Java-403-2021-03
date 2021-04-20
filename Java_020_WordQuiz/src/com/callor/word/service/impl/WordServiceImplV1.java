@@ -131,7 +131,7 @@ public class WordServiceImplV1 implements WordService {
 		return suffleEnglish;
 	}
 	
-	protected void inputWord(String[] viewWord) {
+	protected String inputWord(String[] viewWord) {
 		
 		System.out.println("=".repeat(50));
 		System.out.println("뤼팡의 영단어 게임 V1");
@@ -144,6 +144,8 @@ public class WordServiceImplV1 implements WordService {
 		System.out.println(Arrays.toString(viewWord));
 		System.out.print(">> ");
 		String strInput = scan.nextLine();
+		
+		return strInput;
 	}
 	
 	/*
