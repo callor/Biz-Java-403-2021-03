@@ -33,8 +33,4 @@ public class ScoreVO {
 		this.맞은개수 = 맞은개수;
 		this.재도전 = 3;
 	}
-
-	
-	
-
 }
