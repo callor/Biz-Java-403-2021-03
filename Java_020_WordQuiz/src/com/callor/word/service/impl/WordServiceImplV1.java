@@ -14,8 +14,9 @@ import com.callor.standard.InputService;
 import com.callor.standard.MenuService;
 import com.callor.standard.impl.InputServiceImplV1;
 import com.callor.word.domain.WordVO;
+import com.callor.word.service.WordService;
 
-public class WordServiceImplV1 {
+public class WordServiceImplV1 implements WordService {
 	
 	protected InputService inService;
 	protected MenuService mService;
@@ -130,7 +131,7 @@ public class WordServiceImplV1 {
 		return suffleEnglish;
 	}
 	
-	private void inputWord(String[] viewWord) {
+	protected void inputWord(String[] viewWord) {
 		
 		System.out.println("=".repeat(50));
 		System.out.println("뤼팡의 영단어 게임 V1");
@@ -150,7 +151,7 @@ public class WordServiceImplV1 {
 	 * 알파벳단위로 자르고
 	 * 뒤 섞어 배열로 만든 후 return
 	 */
-	private String[] suffleWord(String strEnglish) {
+	protected String[] suffleWord(String strEnglish) {
 		
 		// 영문단어를 스펠링 단위로 잘라서 배열로 생성
 		String suffleEnglish[] 
@@ -174,7 +175,7 @@ public class WordServiceImplV1 {
 		return suffleEnglish;
 	}
 	
-	private void loadWords(String wordFile) {
+	protected void loadWords(String wordFile) {
 		// TODO word.txt 파일을 읽어 wordList 만들어 두기
 		FileReader fileReader = null;
 		BufferedReader buffer = null;
