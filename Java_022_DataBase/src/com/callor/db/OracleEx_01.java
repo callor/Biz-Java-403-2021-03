@@ -51,7 +51,8 @@ public class OracleEx_01 {
 			ResultSet result = pStr.executeQuery();
 			
 			while(result.next()) {
-				System.out.println(result.getString(2));
+				System.out.print(result.getString(1) + "\t");
+				System.out.println(result.getString("io_buyer"));
 			}
 			result.close();
 			dbConn.close();
