@@ -1,4 +1,4 @@
-package com.callor.app;
+package com.callor.app.model;
 
 public class ScoreVO {
 	
@@ -10,12 +10,19 @@ public class ScoreVO {
 	private Integer avg;
 	private Integer total;
 	
-	@Override
-	public String toString() {
-		return "ScoreVO [strNum=" + strNum + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", avg=" + avg
-				+ ", total=" + total + "]";
+	public ScoreVO() {
+		// TODO Auto-generated constructor stub
 	}
-	
+	public ScoreVO(String strNum, Integer kor, Integer eng, Integer math, Integer avg, Integer total) {
+		super();
+		this.strNum = strNum;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		this.avg = avg;
+		this.total = total;
+	}
+
 	public String getStrNum() {
 		return strNum;
 	}
@@ -54,6 +61,11 @@ public class ScoreVO {
 	}
 
 
+	@Override
+	public String toString() {
+		return "ScoreVO [strNum=" + strNum + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", avg=" + avg
+				+ ", total=" + total + "]";
+	}
 	
 	
 }
