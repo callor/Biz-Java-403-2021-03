@@ -34,7 +34,6 @@ public class OracleEx_01 {
 					DBContract.DB_INFO.PASSWORD
 				);
 			System.out.println("Oracle 연결 성공!!!");
-			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("JDBC Driver 없음!!");
